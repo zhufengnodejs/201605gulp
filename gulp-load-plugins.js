@@ -9,8 +9,15 @@ module.exports = function(){
     //[ 'gulp', 'gulp-less', 'gulp-load-plugins' ]
     return Object.keys(require('./package.json').devDependencies)
         .reduce(function($,key){// $代表当前对象 key代表每个gulp插件模块的名字
-            if(key.startsWith('gulp-'))
-                $[key.slice(5)] = require(key);
+            if(key.startsWith('gulp-')&& key != "gulp-load-plugins"){
+                var attr = key.slice(5);
+                // less concat minify-css=> minifyCss
+                attr = attr.replace(/-(\w)/,function(matched,group1){
+                    return group1.toUpperCase();
+                })
+                $[attr] = require(key);
+            }
+
             return $;
         },{});
     // {less:less插件,sass:sass插件}
