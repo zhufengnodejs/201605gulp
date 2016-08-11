@@ -1,16 +1,17 @@
 var gulp = require('gulp');
-/**
- * 1. 安装相对应的插件
- * 2. 引入此插件
- * 3. 使用此插件
- */
-//自动加载所有的插件
-var $ = require('./gulp-load-plugins')();
-console.log($);
-//var less = require('gulp-less');
-gulp.task('less',function(){
-    //通过src 获取所有的less文件
-    gulp.src('./src/less/**/*.less')
-        .pipe($.less())//交由less插件进行编译处理
-        .pipe(gulp.dest('build/css'))//最后输出到css目录中
-});
+
+var $ = require('gulp-load-plugins')();
+gulp.task('js',function(){
+    gulp.src(['./src/js/*.js','!./src/js/*.tmp.js'])
+        .pipe($.concat('all.js'))
+        .pipe(gulp.dest('./build/js'))
+        .pipe($.uglify())
+        .pipe($.rename('all.min.js'))
+        .pipe(gulp.dest('./build/js'))
+})
+
+gulp.task('css',function(){
+    gulp.src(['./src/css/*.css'])
+        .pipe($.concat('all.css'))
+        .pipe(gulp.dest('./build/css'))
+})
