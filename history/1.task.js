@@ -20,9 +20,6 @@ var gulp = require('gulp');
 gulp.task('hello',function(){
     console.log('hello');
 });
-gulp.task('world',function(){
-    console.log('world');
-});
 /**
  * 1. 执行gulp任务的时候，默认会在当前目录下找gulpfile.js文件
  * 2. --gulpfile 可以指定其它 文件名
