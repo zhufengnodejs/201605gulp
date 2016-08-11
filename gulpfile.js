@@ -1,16 +1,13 @@
 var gulp = require('gulp');
-gulp.task('one',function(){
-    console.log('one');
-});
-gulp.task('two',function(){
-    console.log('two');
-});
-gulp.task('default',function(){
-    //gulp.watch('./src/index.html',['one','two'])
-    //可以监控到被删除或修改的文件，但的确监控不到新增加的文件
-    gulp.watch('./src/*',function(event){
-        //type 变化的类型 changed(修改变化) deleted(删除)
-        //path 修改的文件的路径
-        console.log(event);
-    })
+/**
+ * 1. 安装相对应的插件
+ * 2. 引入此插件
+ * 3. 使用此插件
+ */
+var less = require('gulp-less');
+gulp.task('less',function(){
+    //通过src 获取所有的less文件
+    gulp.src('./src/less/**/*.less')
+        .pipe(less())//交由less插件进行编译处理
+        .pipe(gulp.dest('build/css'))//最后输出到css目录中
 });
